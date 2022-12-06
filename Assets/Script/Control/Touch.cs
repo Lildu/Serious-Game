@@ -10,6 +10,8 @@ public class Touch : MonoBehaviour
 
     private Vector2 MovDirection = Vector2.zero;
 
+    static bool SwipeOff = true; 
+
 
     private void Start()
     {
@@ -24,20 +26,28 @@ public class Touch : MonoBehaviour
         swipeListener.OnSwipe.AddListener(OnSwipe);
     }
 
+    public void SwipeControl()
+    {
+        SwipeOff = false;
+    }
+
     public void OnSwipe(string swipe)
     {
-        Debug.Log(swipe);
-        switch (swipe)
+        if (SwipeOff)
         {
-            case "Left":
-                CameraManager.SwitchCameraLeft();
-                MovDirection = Vector2.left;
-                break;
-            case "Right":
-                CameraManager.SwitchCameraRight();
-                MovDirection = Vector2.right;
-                break;
+            switch (swipe)
+            {
+                case "Left":
+                    CameraManager.SwitchCameraLeft();
+                    MovDirection = Vector2.left;
+                    break;
+                case "Right":
+                    CameraManager.SwitchCameraRight();
+                    MovDirection = Vector2.right;
+                    break;
+            }
         }
+        
 
         foreach (WallMovable wall in Resources.FindObjectsOfTypeAll(typeof(WallMovable)) as WallMovable[])
         {
@@ -46,6 +56,8 @@ public class Touch : MonoBehaviour
 
     }
 
+
+    
 
     private void OnDisable()
     {

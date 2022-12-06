@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Selectable
   - BackTag
+  - Recuperable
   layers:
   - Default
   - TransparentFX

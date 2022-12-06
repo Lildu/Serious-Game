@@ -1,13 +1,19 @@
 using UnityEngine;
 using Cinemachine;
+using System.Collections;
 
 
 public class RayCast : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable";
+    [SerializeField] private string recuperableTag = "Recuperable";
+    //public ItemsPickup itemsPickup;
+    //public Touch touch;
 
     private Transform _selection;
-    // Update is called once per frame
+    
+
+
     void Update()
     {
         if(_selection != null)
@@ -21,7 +27,6 @@ public class RayCast : MonoBehaviour
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // contient l'objet touché par le raycast
             RaycastHit hit;
-
             // condition lu si touché par le raycast
             if (Physics.Raycast(ray, out hit))
             {
@@ -29,12 +34,22 @@ public class RayCast : MonoBehaviour
                 var selection = hit.transform;
                 if (selection.CompareTag(selectableTag))
                 {
-                    Debug.Log(selection.gameObject);
                     CameraManager.SwitchCamera(selection.transform.GetComponentInChildren<CinemachineVirtualCamera>());
+                    //touch.SwipeControl();
                 }
                 _selection = selection;
                
             }
+
+            /*if (Physics.Raycast(ray, out hit, 10))
+            {
+                var selection = hit.transform;
+                if (selection.CompareTag(recuperableTag))
+                {
+                    itemsPickup.Pickup();
+                }
+                _selection = selection;
+            }*/
         }
         
 

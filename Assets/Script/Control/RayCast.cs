@@ -6,13 +6,13 @@ using System.Collections;
 public class RayCast : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable";
-    [SerializeField] private string recuperableTag = "Recuperable";
-    //public ItemsPickup itemsPickup;
-    //public Touch touch;
+    //[SerializeField] private string recuperableTag = "Recuperable";
+    //private ItemsPickup itemsPickup;
+      
 
     private Transform _selection;
-    
 
+    
 
     void Update()
     {
@@ -30,15 +30,13 @@ public class RayCast : MonoBehaviour
             // condition lu si touché par le raycast
             if (Physics.Raycast(ray, out hit))
             {
-               
                 var selection = hit.transform;
                 if (selection.CompareTag(selectableTag))
                 {
                     CameraManager.SwitchCamera(selection.transform.GetComponentInChildren<CinemachineVirtualCamera>());
-                    //touch.SwipeControl();
+                    Touch.isSwipeActive = false;
                 }
-                _selection = selection;
-               
+                _selection = selection;    
             }
 
             /*if (Physics.Raycast(ray, out hit, 10))
@@ -46,6 +44,7 @@ public class RayCast : MonoBehaviour
                 var selection = hit.transform;
                 if (selection.CompareTag(recuperableTag))
                 {
+                    Debug.Log(itemsPickup);
                     itemsPickup.Pickup();
                 }
                 _selection = selection;

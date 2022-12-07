@@ -22,22 +22,28 @@ public class CameraManager : MonoBehaviour
 
     public static void SwitchCamera(CinemachineVirtualCamera camera)
     {
-        InitCamera = ActiveCamera;
-        ActiveCamera = camera;
-        // fixe un priorité haute qui passe sur tout
-        ActiveCamera.Priority = 10;
-
-        foreach (CinemachineVirtualCamera c in cameras)
+        if(camera != ActiveCamera)
         {
-            if (c != ActiveCamera && c.Priority != 0)
+            InitCamera = ActiveCamera;
+            ActiveCamera = camera;
+
+            // fixe un priorité haute qui passe sur tout
+            ActiveCamera.Priority = 10;
+
+            foreach (CinemachineVirtualCamera c in cameras)
             {
-                c.Priority = 0;
+                if (c != ActiveCamera && c.Priority != 0)
+                {
+                    c.Priority = 0;
+                }
             }
         }
     }
 
     public static void SwitchCameraBack()
     {
+        Touch.isSwipeActive = true;
+
         ActiveCamera.Priority = 0;
         ActiveCamera = InitCamera;
 

@@ -10,7 +10,7 @@ public class Touch : MonoBehaviour
 
     private Vector2 MovDirection = Vector2.zero;
 
-    static bool SwipeOff = true; 
+    public static bool isSwipeActive = true; 
 
 
     private void Start()
@@ -26,14 +26,13 @@ public class Touch : MonoBehaviour
         swipeListener.OnSwipe.AddListener(OnSwipe);
     }
 
-    public void SwipeControl()
-    {
-        SwipeOff = false;
-    }
+   
 
     public void OnSwipe(string swipe)
     {
-        if (SwipeOff)
+        Debug.Log(isSwipeActive);
+
+        if (isSwipeActive)
         {
             switch (swipe)
             {
@@ -46,14 +45,12 @@ public class Touch : MonoBehaviour
                     MovDirection = Vector2.right;
                     break;
             }
-        }
-        
 
-        foreach (WallMovable wall in Resources.FindObjectsOfTypeAll(typeof(WallMovable)) as WallMovable[])
-        {
-            wall.MoveWall();
+            foreach (WallMovable wall in Resources.FindObjectsOfTypeAll(typeof(WallMovable)) as WallMovable[])
+            {
+                wall.MoveWall();
+            }
         }
-
     }
 
 

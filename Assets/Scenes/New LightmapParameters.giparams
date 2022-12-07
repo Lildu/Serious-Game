@@ -9,9 +9,9 @@ LightmapParameters:
   m_Name: New LightmapParameters
   serializedVersion: 3
   resolution: 1
-  clusterResolution: 0.5
-  irradianceBudget: 128
-  irradianceQuality: 8192
+  clusterResolution: 0.644
+  irradianceBudget: 195
+  irradianceQuality: 2048
   backFaceTolerance: 0.9
   isTransparent: 0
   modellingTolerance: 0.01
